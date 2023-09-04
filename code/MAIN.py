@@ -19,11 +19,16 @@ data archive.
 
 import subprocess
 import os
-from git import Repo
-from git import Actor
+from datetime import date
+
+repo_path = 'C:/Users/eaper/OneDrive/personal-website/daily-weather-forecasts'
+os.chdir(repo_path)
 
 ###############################################################################
 
+
+###############################################################################
+# Grab todays data
 
 # Daily Pulls - Counties
 subprocess.run(['python', 'county-forecasts.py'])
@@ -31,37 +36,15 @@ subprocess.run(['python', 'county-forecasts.py'])
 # Daily Pulls - Power Plants
 subprocess.run(['python', 'facility-forecasts.py'])
 
+###############################################################################
+
+
+###############################################################################
 # Update GitHub
-repo_path = 'C:/Users/eaper/OneDrive/personal-website/daily-weather-forecasts'
-os.chdir(repo_path)
 
-repo = Repo.init(repo_path).git
-index = Repo.init(repo_path).index
+my_msg = "Daily update: " + str(date.today())
 
-committer = Actor("EAPerry", "eaperry36@gmail.com")
+subprocess.run(['git', 'add', '.'], cwd=repo_path)
+subprocess.run(['git', 'commit', '-m', my_msg], cwd = repo_path)
+subprocess.run(['git', 'push'], cwd = repo_path)
 
-index.add(['README.md'])
-index.commit('Test commit')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-subprocess.Popen(
-    ['C:/Program Files/Git/git-bash.exe', 'C:/Users/eaper/OneDrive/personal-website/daily-weather-forecasts/code/commit-to-github.sh']
-    
-    
-    
-    )
