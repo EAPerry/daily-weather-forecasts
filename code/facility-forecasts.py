@@ -26,13 +26,13 @@ out_dir = "C:/Users/eaper/OneDrive/personal-website/daily-weather-forecasts/"
 ###############################################################################
 # Setup
 
-import requests
 import json
 import pandas as pd
 import numpy as np
 from datetime import date, timedelta
 import time
 import os
+import requests
 
 my_date = date.today()
 
