@@ -31,10 +31,10 @@ os.chdir(repo_path)
 # Grab todays data
 
 # Daily Pulls - Counties
-subprocess.run(['python', 'county-forecasts.py'])
+subprocess.run(['python', 'code/county-forecasts.py'])
 
 # Daily Pulls - Power Plants
-subprocess.run(['python', 'facility-forecasts.py'])
+subprocess.run(['python', 'code/facility-forecasts.py'])
 
 ###############################################################################
 
