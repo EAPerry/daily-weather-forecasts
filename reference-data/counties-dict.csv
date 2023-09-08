@@ -1,0 +1,23 @@
+Variable,Description
+fips,5-digit FIPS county FIPS code
+lat,Latitude of county centroid
+lon,Longitude of county centroid
+name,"String description of the time of day; e.g., ""Monday Night"""
+isDaytime,Boolean; whether or not the current observation is for the daytime or nighttime
+startDate,Date associated with the start time
+endDate,Date associated with the end time
+startTime,Datetime when the forecast observation period begins
+endTime,Datetime when the forecast observation period ends
+temperature,Temperature
+temperatureUnit,Temperature unit; Fahrenheit
+temperatureTrend,"String describing direction of temperatures; e.g., ""rising"""
+windSpeed,"String of the windspeed; e.g., ""5 to 10 mph"""
+windDirection,String abbreviation for the wind direction
+probabilityOfPrecipitation,Probability of precipitation
+probabilityOfPrecipitationUnit,Unit for Probability of precipitation; percent
+dewpoint,Dewpoint
+dewpointUnit,Dewpoint unit; degrees Celsius
+relativeHumidity,Relative humidity
+relativeHumidityUnit,Relative humidity unit; percent
+shortForecast,Brief description of weather forecast
+detailedForecast,"Longer, detailed description of weather forecast"
