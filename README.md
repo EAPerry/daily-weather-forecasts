@@ -1,6 +1,6 @@
 # daily-weather-forecasts
  
-The National Weather Service creates daily weather forecasts across the country, but does not publish historical daily weather forecasts. This repository-updated daily-archives forecasts beginning in September 2023. Daily forecast data are available at the location of county centroids and US power plants.
+The National Weather Service creates daily weather forecasts across the country, but does not publish historical daily weather forecasts. This repository---updated daily---archives forecasts beginning in September 2023. Daily forecast data are available at the location of county centroids and US power plants.
 
 ## About the Data
 
