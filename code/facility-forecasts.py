@@ -10,7 +10,7 @@ US power plants (facilities).
 """
 # -----------------------------------------------------------------------------
 # Contributor(s): Evan Perry
-# Last Revised: 2023-09-04
+# Last Revised: 2023-09-09
 # version = 1.0
 # -----------------------------------------------------------------------------
 
@@ -33,6 +33,8 @@ from datetime import date, timedelta
 import time
 import os
 import requests
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 my_date = date.today()
 
@@ -153,9 +155,12 @@ req_urls = req_urls.dropna()
 # Now make a request for each of the URLs
 todays_df = []
 
+progress_update_when = np.linspace(start=0, stop=1, num=21) * (req_urls.size -1)
+progress_update_when = np.rint(progress_update_when)
 
 for i in range(len(req_urls)):
-
+    
+    # Make request
     res = requests.get(req_urls.iloc[i,0])
     
     if res.status_code < 399:
@@ -184,6 +189,11 @@ for i in range(len(req_urls)):
             
             # Add dataframe to a list
             todays_df.append(contents)
+            
+    # Update progress
+    if i in progress_update_when:
+        print("Facility calls:" + str(round(i/(req_urls.size -1))*100) + "% complete")
+    
 
 df = pd.concat(todays_df)
 
@@ -231,6 +241,8 @@ df = facilities.merge(df, how = 'outer', on='point_url')
 # Clean things up
 df = df.dropna(axis = 0, subset = ['isDaytime'])
 df = df.drop(columns=['point_url', 'period'])
+
+OBS_NUM_PLANTS = df.size
 
 ###############################################################################
 

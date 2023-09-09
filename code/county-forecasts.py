@@ -10,7 +10,7 @@ all US counties.
 """
 # -----------------------------------------------------------------------------
 # Contributor(s): Evan Perry
-# Last Revised: 2023-09-04
+# Last Revised: 2023-09-09
 # version = 1.0
 # -----------------------------------------------------------------------------
 
@@ -32,6 +32,8 @@ import numpy as np
 from datetime import date, timedelta
 import time
 import os
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 my_date = date.today()
 
@@ -117,6 +119,8 @@ req_urls = req_urls.dropna()
 # Now make a request for each of the URLs
 todays_df = []
 
+progress_update_when = np.linspace(start=0, stop=1, num=21) * (req_urls.size -1)
+progress_update_when = np.rint(progress_update_when)
 
 for i in range(len(req_urls)):
 
@@ -148,6 +152,11 @@ for i in range(len(req_urls)):
             
             # Add dataframe to a list
             todays_df.append(contents)
+            
+    # Update progress
+    if i in progress_update_when:
+        print("County calls:" + str(round(i/(req_urls.size -1))*100) + "% complete")
+            
 
 df = pd.concat(todays_df)
 
@@ -195,6 +204,8 @@ df = cnty.merge(df, how = 'outer', on='point_url')
 # Clean things up
 df = df.dropna(axis = 0, subset = ['isDaytime'])
 df = df.drop(columns=['point_url'])
+
+OBS_NUM_COUNTIES = df.size
 
 ###############################################################################
 
