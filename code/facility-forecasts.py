@@ -34,7 +34,7 @@ import time
 import os
 import requests
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
+warnings.filterwarnings("ignore", category=FutureWarning) 
 
 my_date = date.today()
 
@@ -192,7 +192,7 @@ for i in range(len(req_urls)):
             
     # Update progress
     if i in progress_update_when:
-        print("Facility calls:" + str(round(i/(req_urls.size -1))*100) + "% complete")
+        print("Facility calls:" + str(round(i/(req_urls.size -1)*100)) + "% complete")
     
 
 df = pd.concat(todays_df)
@@ -267,4 +267,7 @@ if os.path.exists(export_file):
 else: 
     df.to_csv(export_file, index = False, compression='gzip')
     
+OBS_NUM_PLANTS = pd.DataFrame({'num': [OBS_NUM_PLANTS]})
+OBS_NUM_PLANTS.to_csv(out_dir + "reference-data/daily-obs-facilities.csv", index=False)
+
 ###############################################################################

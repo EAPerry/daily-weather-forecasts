@@ -21,6 +21,7 @@ import subprocess
 import os
 from datetime import date
 import smtplib
+import pandas as pd
 from email.mime.text import MIMEText
 
 repo_path = 'C:/Users/eaper/OneDrive/personal-website/daily-weather-forecasts'
@@ -60,6 +61,11 @@ subprocess.run(['git', 'push'], cwd = repo_path)
 ###############################################################################
 # Send Email Update
 
+OBS_NUM_COUNTIES = pd.read_csv(repo_path + 'reference-data/daily-obs-counties.csv')
+OBS_NUM_COUNTIES = OBS_NUM_COUNTIES['num'][0]
+OBS_NUM_PLANTS = pd.read_csv(repo_path + 'reference-data/daily-obs-facilities.csv')
+OBS_NUM_PLANTS = OBS_NUM_PLANTS['num'][0]
+
 subject = "Daily Weather Forecast Data"
 body = "The daily weather forecast data pull has finished for the day. There were " \
     + str(OBS_NUM_COUNTIES) + " observations in the county data and " + \
@@ -67,7 +73,6 @@ body = "The daily weather forecast data pull has finished for the day. There wer
 sender = "evan.perry.personal@gmail.com"
 recipients = ["evan.perry.personal@gmail.com"]
 password = API_KEY
-
 
 def send_email(subject, body, sender, recipients, password):
     msg = MIMEText(body)
@@ -80,5 +85,8 @@ def send_email(subject, body, sender, recipients, password):
     print("Message sent.")
 
 send_email(subject, body, sender, recipients, password)
+
+os.remove(repo_path + 'reference-data/daily-obs-counties.csv')
+os.remove(repo_path + 'reference-data/daily-obs-facilities.csv')
 
 ###############################################################################

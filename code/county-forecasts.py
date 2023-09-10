@@ -33,7 +33,7 @@ from datetime import date, timedelta
 import time
 import os
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
+warnings.filterwarnings("ignore", category=FutureWarning) 
 
 my_date = date.today()
 
@@ -155,7 +155,7 @@ for i in range(len(req_urls)):
             
     # Update progress
     if i in progress_update_when:
-        print("County calls:" + str(round(i/(req_urls.size -1))*100) + "% complete")
+        print("County calls:" + str(round(i/(req_urls.size -1)*100)) + "% complete")
             
 
 df = pd.concat(todays_df)
@@ -229,6 +229,9 @@ if os.path.exists(export_file):
     
 else: 
     df.to_csv(export_file, index = False, compression='gzip')
+    
+OBS_NUM_COUNTIES = pd.DataFrame({'num': [OBS_NUM_COUNTIES]})
+OBS_NUM_COUNTIES.to_csv(out_dir + "reference-data/daily-obs-counties.csv", index=False)    
     
 ###############################################################################
 
