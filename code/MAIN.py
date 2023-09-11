@@ -61,9 +61,9 @@ subprocess.run(['git', 'push'], cwd = repo_path)
 ###############################################################################
 # Send Email Update
 
-OBS_NUM_COUNTIES = pd.read_csv(repo_path + 'reference-data/daily-obs-counties.csv')
+OBS_NUM_COUNTIES = pd.read_csv('reference-data/daily-obs-counties.csv')
 OBS_NUM_COUNTIES = OBS_NUM_COUNTIES['num'][0]
-OBS_NUM_PLANTS = pd.read_csv(repo_path + 'reference-data/daily-obs-facilities.csv')
+OBS_NUM_PLANTS = pd.read_csv('reference-data/daily-obs-facilities.csv')
 OBS_NUM_PLANTS = OBS_NUM_PLANTS['num'][0]
 
 subject = "Daily Weather Forecast Data"
@@ -86,7 +86,7 @@ def send_email(subject, body, sender, recipients, password):
 
 send_email(subject, body, sender, recipients, password)
 
-os.remove(repo_path + 'reference-data/daily-obs-counties.csv')
-os.remove(repo_path + 'reference-data/daily-obs-facilities.csv')
+os.remove('reference-data/daily-obs-counties.csv')
+os.remove('reference-data/daily-obs-facilities.csv')
 
 ###############################################################################
