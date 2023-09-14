@@ -205,7 +205,7 @@ df = cnty.merge(df, how = 'outer', on='point_url')
 df = df.dropna(axis = 0, subset = ['isDaytime'])
 df = df.drop(columns=['point_url'])
 
-OBS_NUM_COUNTIES = df.size
+OBS_NUM_COUNTIES = df['fips'].size
 
 ###############################################################################
 

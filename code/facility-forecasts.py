@@ -242,7 +242,7 @@ df = facilities.merge(df, how = 'outer', on='point_url')
 df = df.dropna(axis = 0, subset = ['isDaytime'])
 df = df.drop(columns=['point_url', 'period'])
 
-OBS_NUM_PLANTS = df.size
+OBS_NUM_PLANTS = df["plantid"].size
 
 ###############################################################################
 
