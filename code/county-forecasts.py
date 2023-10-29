@@ -138,10 +138,10 @@ for i in range(len(req_urls)):
             contents = pd.read_json(contents)
             
             # Filter observations in the dataframe to just those from today
-            contents['startTime'] = pd.to_datetime(contents['startTime']).dt.strftime('%Y-%m-%dT%H:%M:%SZ')
-            contents['endTime'] = pd.to_datetime(contents['endTime']).dt.strftime('%Y-%m-%dT%H:%M:%SZ')
-            contents['startDate'] = pd.to_datetime(contents['startTime']).dt.date
-            contents['endDate'] = pd.to_datetime(contents['endTime']).dt.date
+            contents['startTime'] = pd.to_datetime(contents['startTime'], utc = True).dt.strftime('%Y-%m-%dT%H:%M:%SZ')
+            contents['endTime'] = pd.to_datetime(contents['endTime'], utc = True).dt.strftime('%Y-%m-%dT%H:%M:%SZ')
+            contents['startDate'] = pd.to_datetime(contents['startTime'], utc = True).dt.date
+            contents['endDate'] = pd.to_datetime(contents['endTime'], utc = True).dt.date
             contents['today'] = np.where(contents['startDate'] == my_date, 1, 0)
             contents['today'] = np.where(contents['endDate'] == my_date, 1, contents['today'])
             contents = contents[contents['today'] == 1]
